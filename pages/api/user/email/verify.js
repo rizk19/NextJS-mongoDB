@@ -1191,8 +1191,7 @@ handler.post(async (req, res) => {
   });
 
   request
-    .then((result) => {
-      console.log('result.body', result.body);
+    .then(() => {
       res.status(204).end();
     })
     .catch((err) => {
