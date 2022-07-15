@@ -1,11 +1,8 @@
-[![Next.js](https://assets.zeit.co/image/upload/v1538361091/repositories/next-js/next-js.png)](https://nextjs.org)
+<h1 align="center">Next.js 🔥 MongoDB</h1>
 
-<h1 align="center">Next.js ❤️ MongoDB</h1>
-
-<h5>Credit to Huang Vo (https://dev.to/hoangvvo).</h5>
+<h5>Modified by Rizki A Faris</h5>
+<h6>Starter Credit to Huang Vo (https://dev.to/hoangvvo).</h6>
 <div align="center">
-  
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fhoangvvo%2Fnextjs-mongodb-app&env=MONGODB_URI,CLOUDINARY_URL,NODEMAILER_CONFIG,WEB_URI&envDescription=Environment%20Variables&envLink=https%3A%2F%2Fgithub.com%2Fhoangvvo%2Fnextjs-mongodb-app%23environmental-variables&demo-title=nextjs-mongodb-app%20demo&demo-description=A%20demo%20deployed%20on%20Vercel&demo-url=https%3A%2F%2Fnextjs-mongodb.vercel.app%2F)
 
 An [**Next.js**](https://github.com/zeit/next.js/) and [**MongoDB**](https://www.mongodb.com/) web application, designed with simplicity for learning and real-world applicability in mind.
 
@@ -17,9 +14,9 @@ An [**Next.js**](https://github.com/zeit/next.js/) and [**MongoDB**](https://www
 
 <div align="center">
 
-🐇 Fast and light without [bulky](https://bundlephobia.com/result?p=express@4.17.1), [slow](https://github.com/fastify/benchmarks#benchmarks) Express.js.
+💨 Fast and light without [bulky](https://bundlephobia.com/result?p=express@4.17.1), [slow](https://github.com/fastify/benchmarks#benchmarks) Express.js.
 
-✨ Full [API Routes](https://nextjs.org/blog/next-9#api-routes) implementation and 👻 Serverless ready
+✨ Full [API Routes](https://nextjs.org/blog/next-9#api-routes) implementation and Serverless ready
 
 🤠 Good ol' Middleware pattern, compatible with Express ecosystem, powered by [next-connect](https://github.com/hoangvvo/next-connect)
 
@@ -34,10 +31,10 @@ An [**Next.js**](https://github.com/zeit/next.js/) and [**MongoDB**](https://www
 - [x] Session-based authentication ([Passport.js](https://github.com/jaredhanson/passport))
 - [x] Sign up/Log in/Sign out API
 - [x] Authentication via email/password
-- [ ] Authentication via OAuth (Google, Facebook, etc.)
-- [x] Email verification
+- [x] Email verification using Mailjet
 - [x] Password change
-- [x] Password reset via email
+- [x] Password reset via email using Mailjet
+- [x] Save avatar photos using MongoDB GridFS
 
 </div>
 
@@ -57,12 +54,6 @@ An [**Next.js**](https://github.com/zeit/next.js/) and [**MongoDB**](https://www
 - [x] View others' profiles
 - [x] Posts and comments
 
-</div>
-
-<div align="center">
-  
-<sup>Have any features that interest you, [make an issue](https://github.com/hoangvvo/nextjs-mongodb-app/issues). Would like to work on a feature, [make a PR](https://github.com/hoangvvo/nextjs-mongodb-app/pulls).<sup>
-  
 </div>
 
 <h2 align="center">Guide</h2>
@@ -93,9 +84,9 @@ This project uses the following dependencies:
 - `validator` - optional but recommended, to validate email.
 - `ajv` - optional but recommended, to validate request body.
 - `multer` - may be replaced with any middleware that handles `multipart/form-data`
-- `cloudinary` - optional, **only if** you are using [Cloudinary](https://cloudinary.com) for image upload.
+- `multer-gridfs-storage` - finding way to store a files/image to mongodb using [GridFS](https://www.npmjs.com/package/multer-gridfs-storage) for image upload or files and make it a chunk tables in your database. Not observe about performance, but i just try to avoid using any external resource for images.
 - several other optional dependencies for cosmetic purposes.
-- `nodemailer` - optional, **only if** you use it for email. It is recommended to use 3rd party services like [Mailgun](https://www.mailgun.com/), [AWS SES](https://aws.amazon.com/ses/), etc. instead.
+- `node-mailjet` - optional, **only if** you use it for email. It is recommended to use 3rd party services like [Mailjet](https://www.mailjet.com/) it's free for around 6,000 emails/month, [node-mailjet](https://www.npmjs.com/package/node-mailjet).
 
 <h3 align="center">Environmental variables</h3>
 
@@ -103,8 +94,11 @@ Environmental variables in this project include:
 
 - `MONGODB_URI` The MongoDB Connection String (with credentials and database name)
 - `WEB_URI` The _URL_ of your web app.
-- `CLOUDINARY_URL` (optional, Cloudinary **only**) Cloudinary environment variable for configuration. See [this](https://cloudinary.com/documentation/node_integration#configuration).
-- `NODEMAILER_CONFIG` (optional, if using nodemailer **only**) JSON stringified nodemailer config. eg. `{"service":"Gmail","auth":{"user":"hoangvvo.02@gmail.com","pass":"aHR0cHM6Ly95b3V0dS5iZS9kUXc0dzlXZ1hjUQ=="}}`
+- `MONGO_IMG_BUCKET` The bucket name for your collection of photos/image eg. `photos` and you will have collection photos.files and photos.chunks.
+- `MONGO_PDF_BUCKET` The bucket name for your collection of pdf, but not yet implemented. eg. `pdf` and you will have collection pdf.files and pdf.chunks.
+- `MAILJET_KEY` (optional, Mailjet **only**) Mailjet environment variable for key. See [this](https://app.mailjet.com/account/apikeys) **carefull** you only have one opportunity to access your key and secret or you need to reset it for a new one.
+- `MAILJET_SECRET` (optional, Mailjet **only**) Mailjet environment variable for secret. See [this](https://app.mailjet.com/account/apikeys) idem with the MAILJET_KEY.
+- `MAILJET_SENDER_MAIL` (optional, but you need to add sender before use it [this](https://app.mailjet.com/account/sender)).
 
 <h3 align="center">Development</h3>
 
@@ -121,9 +115,7 @@ You can also deploy this with serverless providers given the correct setup.
 <h2 align="center">Contributing</h2>
 
 <div align="center">
-  
-Please see Huang Vo [contributing.md](CONTRIBUTING.md).
-
+  i'm not yet open for this, but if you need just reach me through email.
 </div>
 
 <h2 align="center">
