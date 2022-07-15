@@ -1175,7 +1175,7 @@ handler.post(async (req, res) => {
         },
         To: [
           {
-            Email: 'rizkiahf@gmail.com',
+            Email: req.user.email,
             Name: req.user.name,
           },
         ],
