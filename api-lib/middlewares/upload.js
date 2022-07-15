@@ -7,7 +7,6 @@ export const storage = GridFsStorage({
   options: { useNewUrlParser: true, useUnifiedTopology: true },
   file: (req, file) => {
     const match = ['image/png', 'image/jpeg', 'application/pdf'];
-    console.log('jalan bib file', req.user);
     const splitName = file.originalname.toLowerCase().split(' ').join('_');
     const theFName = `${Date.now()}-raycorp-${splitName}`;
     if (match.indexOf(file.mimetype) === 2) {

@@ -66,13 +66,11 @@ handler.patch(
       // );
       // const countCursor = images.estimatedDocumentCount()
       // const cursor = images.find({});
-      console.log('filesfiles', req.files);
       const theImageName = `${req.files[0].filename}`;
-      console.log('theImageName', theImageName);
       const uploadedImage = await findPhotosByFileName(db, theImageName);
       if (uploadedImage) {
-        console.log('image', uploadedImage);
-        profilePicture = process.env.WEB_URI + `img/${uploadedImage.filename}`;
+        profilePicture =
+          process.env.WEB_URI + `api/img/${uploadedImage.filename}`;
       }
       // const image = await cloudinary.uploader.upload(req.file.path, {
       //   width: 512,
